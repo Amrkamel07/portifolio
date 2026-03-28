@@ -1,107 +1,99 @@
+// --- 1. INITIALIZE EMAILJS ---
+(function() {
+    emailjs.init("-pmMN-gAfKo5MaEZ5"); // Your Public Key
+})();
 
-//menuuuu mobile
-let menuicon =document.querySelector('#menuicon')
-let navbar=document.querySelector('.navbar')
-menuicon.onclick=()=>{
-    menuicon.classList.toggle('bx-x')
-    navbar.classList.toggle('active')
+// --- 2. MOBILE MENU & UI LOGIC ---
+let menuicon = document.querySelector('#menuicon');
+let navbar = document.querySelector('.navbar');
+if(menuicon) {
+    menuicon.onclick = () => {
+        menuicon.classList.toggle('bx-x');
+        navbar.classList.toggle('active');
+    };
 }
-//read more
-let readmore=document.getElementById('btn2')
-readmore.onclick=(change)=>{if(readmore.innerHTML==="Read More")
-    {readmore.innerHTML="show less"}
-    else if(readmore.innerHTML==="show less"){
-        readmore.innerHTML="Read More"
-    } 
+
+let readmore = document.getElementById('btn2');
+if(readmore) {
+    readmore.onclick = () => {
+        readmore.innerHTML = (readmore.innerHTML === "Read More") ? "show less" : "Read More";
+    };
 }
-//slider
-let next = document.querySelector('.next')
-let prev = document.querySelector('.prev')
 
-next.addEventListener('click', function(){
-    let webs = document.querySelectorAll('.web')
-    document.querySelector('.slide').appendChild(webs[0])
-})
+// --- 3. SLIDER ---
+let next = document.querySelector('.next');
+let prev = document.querySelector('.prev');
+if(next && prev) {
+    next.addEventListener('click', () => {
+        let webs = document.querySelectorAll('.web');
+        document.querySelector('.slide').appendChild(webs[0]);
+    });
+    prev.addEventListener('click', () => {
+        let webs = document.querySelectorAll('.web');
+        document.querySelector('.slide').prepend(webs[webs.length - 1]);
+    });
+}
 
-prev.addEventListener('click', function(){
-    let webs = document.querySelectorAll('.web')
-    document.querySelector('.slide').prepend(webs[webs.length - 1]) // here the length of webs = 6
-})
-//scrolltransaction
-let section=document.querySelectorAll('section')
-let navlink=document.querySelectorAll('header nav ul li a')
-window.onscroll=()=>{
-    section.forEach(sec=>{
-        let top=sec.scrolly
-        let offset=sec.offsetTop-150
-        let hieght=sec.offsetHeight
-        let id=sec.getAttribute('id')
-        if( top>offset && top<offset + hieght){
+// --- 4. SCROLL EFFECTS ---
+let section = document.querySelectorAll('section');
+let navlink = document.querySelectorAll('header nav ul li a');
+let scrollarrow = document.getElementById('scrollarrow');
+
+window.onscroll = () => {
+    if (window.scrollY >= 400) {
+        if(scrollarrow) scrollarrow.style.display = "block";
+    } else {
+        if(scrollarrow) scrollarrow.style.display = "none";
+    }
+
+    section.forEach(sec => {
+        let top = window.scrollY;
+        let offset = sec.offsetTop - 150;
+        let height = sec.offsetHeight;
+        let id = sec.getAttribute('id');
+        if (top > offset && top < offset + height) {
             navlink.forEach(links => {
-                links.classList.remove('active')
-                document.querySelector('header nav ul li a[href*='+id+']').classList.add('active')
-                
+                links.classList.remove('active');
+                let target = document.querySelector('header nav ul li a[href*=' + id + ']');
+                if(target) target.classList.add('active');
             });
         }
-    })
-}
-//contact form
-const form=document.querySelector('form')
+    });
+};
 
-function sendemail(){
-
-}
-function checkinputs(){
-    const items=document.querySelectorAll('.item')
-    items.forEach(function (item){
-        if(item.value===''){
-            item.classList.add('error')
-            item.parentElement.classList.add('error')
-        }
-        item.onkeyup=()=>{
-            if(item.value!=''){
-             item.classList.remove('error')
-            item.parentElement.classList.remove('error')   
-            }else{
-                item.classList.add('error')
-            item.parentElement.classList.add('error')
-            }
-        }
-            
-    })
-
+if(scrollarrow) {
+    scrollarrow.onclick = () => window.scrollTo({ left: 0, top: 0, behavior: "smooth" });
 }
 
+// --- 5. THE CONTACT FORM FIX ---
+document.addEventListener("DOMContentLoaded", function () {
+    const contactForm = document.getElementById("contact-form");
+    const submitBtn = document.getElementById("submit-btn");
+    const successMsg = document.getElementById("form-success");
 
-form.addEventListener('submit', (e)=>{
-  (e).preventDefault();
-  checkinputs()
-  //sendemail() 
-})
+    if (contactForm) {
+        contactForm.addEventListener("submit", function (e) {
+            e.preventDefault(); // Stop reload
 
-//scroll arrow
-let scrollarrow= document.getElementById('scrollarrow')
-window.onscroll= ()=>
+            submitBtn.textContent = "Sending...";
+            submitBtn.disabled = true;
 
-{
-            let currentscroll=window.scrollY
+            // Using your actual IDs provided earlier
+            const serviceID = "service_s17v0hi";   
+            const templateID = "template_3lxoowj"; 
 
-    if(currentscroll >=400)
-    {
-
-        scrollarrow.style.display="block"
-    }else
-    {
-
-         scrollarrow.style.display="none"
-       
+            emailjs.sendForm(serviceID, templateID, this)
+                .then(function () {
+                    console.log("SUCCESS!");
+                    contactForm.style.display = "none";
+                    successMsg.style.display = "block";
+                })
+                .catch(function (error) {
+                    console.error("FAILED...", error);
+                    submitBtn.textContent = "Send Message";
+                    submitBtn.disabled = false;
+                    alert("EmailJS Error: " + error.text);
+                });
+        });
     }
-}
-scrollarrow.onclick=()=>{
-    scroll({
-    left:0,
-    top:0,
-    behavior:"smooth"  
-    })
-}
-
+});
