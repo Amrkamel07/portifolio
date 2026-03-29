@@ -53,7 +53,8 @@ header {
 
 .logo { font-size: 1.8rem; color: var(--main-color); }
 .navbar a { font-size: 1.1rem; color: #fff; margin-left: 2rem; transition: 0.3s; }
-.navbar a:hover, .navbar a.active { color: var(--main-color); }
+.navbar a:hover, .navbar a.active { color: var(--main-color);     text-transform: capitalize;
+ }
 
 #menuicon { font-size: 2.5rem; display: none; cursor: pointer; }
 
@@ -135,7 +136,7 @@ section { min-height: 100vh; padding: 10rem 7% 5rem; }
 /* --- Tech Stack Styling --- */
 .tech-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    grid-template-columns: repeat(2, minmax(180px, 1fr));
     gap: 2rem;
     padding-top: 2rem;
 }
@@ -383,7 +384,7 @@ section { min-height: 100vh; padding: 10rem 7% 5rem; }
 /* --- Services Grid --- */
 .services-box-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(3, minmax(280px, 1fr));
     gap: 2rem;
 }
 
