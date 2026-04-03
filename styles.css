@@ -404,64 +404,11 @@ section { min-height: 100vh; padding: 10rem 7% 5rem; }
 .nav-arrows button:hover { background: #fff; transform: scale(1.1); }
 
 /* --- Services Grid --- */
+/* --- Services Grid (Responsive Fix) --- */
 .services-box-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-}
-
-.service-card {
-    padding: 3rem 2rem;
-    background: var(--card-bg);
-    border: 1px solid #333;
-    border-radius: 20px;
-    text-align: center;
-    transition: 0.4s;
-}
-
-.service-card:hover {
-    border-color: var(--main-color);
-    transform: translateY(-10px);
-}
-
-.service-card i { font-size: 3.5rem; color: var(--main-color); margin-bottom: 1rem; }
-
-/* --- Contact & Scroll Arrow --- */
-.contact form { max-width: 700px; margin: 0 auto; }
-.input-box { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
-.contact form .item {
-    width: 100%; padding: 1rem; background: var(--card-bg);
-    border: 1px solid #333; border-radius: 8px; color: #fff;
-}
-
-.scrollarrow {
-    position: fixed; bottom: 25px; right: 25px;
-    width: 50px; height: 50px; background: var(--main-color);
-    border-radius: 50%; display: none; z-index: 2000; cursor: pointer;
-}
-
-/* --- Responsive Layout --- */
-@media (max-width: 991px) {
-    .home, .about-container { flex-direction: column; text-align: center; }
-    .about-content h2 { text-align: center; }
-    .about-stats { justify-content: center; }
-}
-
-@media (max-width: 768px) {
-    #menuicon { display: block; }
-    .navbar {
-        position: absolute; top: 100%; left: -100%; width: 100%;
-        background: rgba(0,0,0,0.9); transition: 0.4s;
-    }
-    .navbar.active { left: 0; }
-    .navbar a { display: block; margin: 1.5rem 0; text-align: center; }
-    .input-box { grid-template-columns: 1fr; }
-    .slide .web:nth-child(n+3) { display: none; } /* Better fit for mobile slider */
-}
-/* Ensure the 6 cards wrap correctly */
-.services-box-container {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(300px, 1fr));
+    /* This allows the grid to automatically decide how many columns fit */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2.5rem;
 }
 
@@ -472,12 +419,123 @@ section { min-height: 100vh; padding: 10rem 7% 5rem; }
     border-radius: 20px;
     text-align: center;
     transition: 0.4s ease;
+    width: 100%; /* Prevents overflow on tiny screens */
 }
 
 .service-card:hover {
     border-color: var(--main-color);
     transform: translateY(-10px);
     background: rgba(0, 255, 149, 0.03);
+}
+
+.service-card i { 
+    font-size: 3.5rem; 
+    color: var(--main-color); 
+    margin-bottom: 1rem; 
+}
+
+/* --- Contact Section Responsive --- */
+.contact form { 
+    max-width: 700px; 
+    margin: 0 auto; 
+    width: 100%;
+}
+
+.input-box { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 1.5rem; 
+    margin-bottom: 1.5rem; 
+}
+
+.contact form .item {
+    width: 100%; 
+    padding: 1rem; 
+    background: var(--card-bg);
+    border: 1px solid #333; 
+    border-radius: 8px; 
+    color: #fff;
+}
+
+/* --- Responsive Layout Breakpoints --- */
+
+/* Tablets and Small Laptops */
+@media (max-width: 991px) {
+    header {
+        padding: 1.5rem 4%;
+    }
+
+    section {
+        padding: 8rem 4% 3rem;
+    }
+
+    .home, .about-container { 
+        flex-direction: column; 
+        text-align: center; 
+    }
+
+    .home-content h1 {
+        font-size: 3.5rem;
+    }
+
+    .about-content h2 { 
+        text-align: center; 
+    }
+
+    .about-stats { 
+        justify-content: center; 
+    }
+}
+
+/* Mobile Phones */
+@media (max-width: 768px) {
+    #menuicon { 
+        display: block; 
+    }
+
+    .navbar {
+        position: absolute; 
+        top: 100%; 
+        left: -100%; 
+        width: 100%;
+        background: rgba(0,0,0,0.95); 
+        backdrop-filter: blur(15px);
+        transition: 0.4s;
+        padding: 1rem 0;
+        border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .navbar.active { 
+        left: 0; 
+    }
+
+    .navbar a { 
+        display: block; 
+        margin: 1.5rem 0; 
+        text-align: center; 
+        font-size: 1.2rem;
+    }
+
+    /* Stack inputs vertically on mobile */
+    .input-box { 
+        grid-template-columns: 1fr; 
+        gap: 1rem;
+    }
+
+    .heading {
+        font-size: 2.8rem;
+    }
+
+    .slide .web:nth-child(n+3) { 
+        display: none; 
+    }
+
+    /* Fix image sizing for about/home on mobile */
+    .img-box, .about-img-box {
+        width: 250px;
+        height: 250px;
+        margin: 0 auto;
+    }
 }
 
 /* Skills bar animation */
