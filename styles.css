@@ -53,8 +53,11 @@ header {
 
 .logo { font-size: 1.8rem; color: var(--main-color); }
 .navbar a { font-size: 1.1rem; color: #fff; margin-left: 2rem; transition: 0.3s; }
-.navbar a:hover, .navbar a.active { color: var(--main-color);     text-transform: capitalize;
- }
+.navbar a:hover, .navbar a.active { 
+    color: var(--main-color); 
+    text-transform: capitalize;
+    
+}
 
 #menuicon { font-size: 2.5rem; display: none; cursor: pointer; }
 
@@ -74,6 +77,7 @@ section { min-height: 100vh; padding: 10rem 7% 5rem; }
     font-size: 5rem;
     font-weight: 800;
     line-height: 1.1;
+    
 }
 
 .home-content h3 {
@@ -126,6 +130,24 @@ section { min-height: 100vh; padding: 10rem 7% 5rem; }
 .img-box img {
     width: 90%;
     filter: drop-shadow(0 0 10px #000);
+}
+.education-info {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border-left: 3px solid var(--main-color);
+    margin: 1.5rem 0;
+}
+
+.education-info i {
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+/* Adjust about-stats spacing if needed */
+.about-stats {
+    display: flex;
+    gap: 3rem;
 }
 
 @keyframes morph {
@@ -384,7 +406,7 @@ section { min-height: 100vh; padding: 10rem 7% 5rem; }
 /* --- Services Grid --- */
 .services-box-container {
     display: grid;
-    grid-template-columns: repeat(3, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
 }
 
@@ -439,7 +461,7 @@ section { min-height: 100vh; padding: 10rem 7% 5rem; }
 /* Ensure the 6 cards wrap correctly */
 .services-box-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(3, minmax(300px, 1fr));
     gap: 2.5rem;
 }
 
@@ -561,4 +583,118 @@ section { min-height: 100vh; padding: 10rem 7% 5rem; }
     background: rgba(255, 255, 255, 0.05) !important;
     border: 1px solid rgba(255, 255, 255, 0.2) !important;
     color: #fff !important;
+}/* Philosophy Section */
+.philosophy-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.phil-card {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    transition: 0.3s;
+}
+
+.phil-card:hover {
+    border-color: var(--main-color);
+    transform: scale(1.02);
+}
+
+.phil-card i {
+    font-size: 3rem;
+    color: var(--main-color);
+    margin-bottom: 1rem;
+}
+
+/* Featured Projects List */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2.5rem;
+}
+
+.project-detail-card {
+    background: rgba(255,255,255,0.03);
+    padding: 2rem;
+    border-left: 4px solid var(--main-color);
+    border-radius: 0 15px 15px 0;
+}
+
+.tech-stack {
+    display: block;
+    color: var(--main-color);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.project-detail-card ul {
+    list-style: none;
+    color: #ccc;
+}
+
+.project-detail-card ul li {
+    margin-bottom: 0.8rem;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.project-detail-card ul li::before {
+    content: '▹';
+    position: absolute;
+    left: 0;
+    color: var(--main-color);
+}
+
+/* Availability Section */
+.availability {
+    min-height: auto !important;
+    padding: 5rem 7%;
+}
+
+.avail-box {
+    background: var(--card-bg);
+    padding: 3rem;
+    border-radius: 25px;
+    border: 1px solid rgba(0, 255, 149, 0.2);
+    text-align: center;
+}
+
+.status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.pulse {
+    width: 15px;
+    height: 15px;
+    background: var(--main-color);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--main-color);
+    animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+    0% { opacity: 0.4; }
+    50% { opacity: 1; }
+    100% { opacity: 0.4; }
+}
+
+.hours p {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+    color: #aaa;
+}
+
+.hours i {
+    color: var(--main-color);
+    margin-right: 10px;
 }
