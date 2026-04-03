@@ -698,3 +698,175 @@ section { min-height: 100vh; padding: 10rem 7% 5rem; }
     color: var(--main-color);
     margin-right: 10px;
 }
+/* ==========================================================================
+   1. WORKING PHILOSOPHY (Responsive Fix)
+   ========================================================================== */
+.philosophy-container {
+    display: grid;
+    /* On mobile it will be 1 column, on tablets/desktop it scales up */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.phil-card {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    transition: 0.3s;
+    backdrop-filter: blur(10px);
+}
+
+.phil-card:hover {
+    border-color: var(--main-color);
+    transform: translateY(-5px); /* Changed from scale to prevent overflow issues */
+}
+
+.phil-card i {
+    font-size: 3rem;
+    color: var(--main-color);
+    margin-bottom: 1rem;
+}
+
+/* ==========================================================================
+   2. FEATURED PROJECTS (Responsive Fix)
+   ========================================================================== */
+.projects-grid {
+    display: grid;
+    /* Forces 1 column on mobile, changes to 2 on larger screens below */
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+.project-detail-card {
+    background: rgba(255,255,255,0.03);
+    padding: 1.5rem; /* Smaller padding for mobile */
+    border-left: 4px solid var(--main-color);
+    border-radius: 0 15px 15px 0;
+    backdrop-filter: blur(5px);
+}
+
+.tech-stack {
+    display: block;
+    color: var(--main-color);
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+    word-wrap: break-word; /* Prevents long tech strings from breaking the layout */
+}
+
+.project-detail-card ul {
+    list-style: none;
+    color: #ccc;
+}
+
+.project-detail-card ul li {
+    font-size: 0.95rem;
+    margin-bottom: 0.8rem;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.project-detail-card ul li::before {
+    content: '▹';
+    position: absolute;
+    left: 0;
+    color: var(--main-color);
+}
+
+/* ==========================================================================
+   3. AVAILABILITY (Responsive Fix)
+   ========================================================================== */
+.availability {
+    min-height: auto !important;
+    padding: 5rem 7%;
+}
+
+.avail-box {
+    background: var(--card-bg);
+    padding: 2rem; /* Scaled down padding for smaller screens */
+    border-radius: 20px;
+    border: 1px solid rgba(0, 255, 149, 0.2);
+    text-align: center;
+}
+
+.status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; /* Allows text to drop below dot if screen is tiny */
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem; /* Slightly smaller text for mobile */
+}
+
+.pulse {
+    width: 12px;
+    height: 12px;
+    background: var(--main-color);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--main-color);
+    animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+    0% { opacity: 0.4; }
+    50% { opacity: 1; }
+    100% { opacity: 0.4; }
+}
+
+.hours p {
+    font-size: 1rem;
+    margin: 0.8rem 0;
+    color: #aaa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap; /* Prevents text from pushing past screen edges */
+    gap: 5px;
+}
+
+.hours i {
+    color: var(--main-color);
+    font-size: 1.2rem;
+}
+
+
+/* ==========================================================================
+   4. MEDIA QUERIES (The actual mobile fixes)
+   ========================================================================== */
+
+/* For Tablets and Desktop (Widths above 768px) */
+@media (min-width: 768px) {
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr); /* Splits projects into 2 columns */
+        gap: 2.5rem;
+    }
+    
+    .project-detail-card {
+        padding: 2rem; /* Restores larger padding for big screens */
+    }
+    
+    .avail-box {
+        padding: 3rem; /* Restores larger padding for big screens */
+    }
+    
+    .status {
+        font-size: 1.5rem;
+    }
+    
+    .hours p {
+        font-size: 1.2rem;
+    }
+}
+
+/* Hard fix for standard mobile views where padding might squeeze content */
+@media (max-width: 480px) {
+    section {
+        padding: 6rem 5% 3rem; /* Reduces section padding so you have more room */
+    }
+    .heading {
+        font-size: 2.5rem; /* Shrinks section headers so they don't break lines */
+    }
+}
