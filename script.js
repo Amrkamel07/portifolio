@@ -35,35 +35,22 @@ if(next && prev) {
 }
 
 // --- 4. SCROLL EFFECTS ---
-let section = document.querySelectorAll('section');
-let navlink = document.querySelectorAll('header nav ul li a');
-let scrollarrow = document.getElementById('scrollarrow');
+const scrollArrow = document.querySelector('#scrollarrow');
 
-window.onscroll = () => {
-    if (window.scrollY >= 400) {
-        if(scrollarrow) scrollarrow.style.display = "block";
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+        scrollArrow.classList.add('show');
     } else {
-        if(scrollarrow) scrollarrow.style.display = "none";
+        scrollArrow.classList.remove('show');
     }
+});
 
-    section.forEach(sec => {
-        let top = window.scrollY;
-        let offset = sec.offsetTop - 150;
-        let height = sec.offsetHeight;
-        let id = sec.getAttribute('id');
-        if (top > offset && top < offset + height) {
-            navlink.forEach(links => {
-                links.classList.remove('active');
-                let target = document.querySelector('header nav ul li a[href*=' + id + ']');
-                if(target) target.classList.add('active');
-            });
-        }
+scrollArrow.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
     });
-};
-
-if(scrollarrow) {
-    scrollarrow.onclick = () => window.scrollTo({ left: 0, top: 0, behavior: "smooth" });
-}
+});
 
 // --- 5. THE CONTACT FORM FIX ---
 document.addEventListener("DOMContentLoaded", function () {
